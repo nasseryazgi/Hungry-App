@@ -41,8 +41,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       controller: widget.controller,
       validator: (data) {
-        if (data == null) print('please fill ${widget.hintText}');
-        null;
+        if (data==null ||data!.isEmpty)
+          return 'please fill ${widget.hintText}';
       },
       obscureText: _obscureText,
       cursorHeight: 20,

@@ -6,9 +6,11 @@ import 'package:hungry/core/constants/app_strings.dart';
 
 import '../../../shared/custom_text.dart';
 import '../../../shared/custom_textfield.dart';
+import '../widgets/custom_buttom.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  LoginView({super.key});
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,49 +23,42 @@ class LoginView extends StatelessWidget {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Column(
-              children: [
-                Gap(100),
+            child: Form(
+              key: formkey,
+              child: Column(
+                children: [
+                  Gap(100),
 
-                SvgPicture.asset('assets/logo/hungry.svg', width: 300),
-                Gap(10),
-                CustomText(
-                  text: 'Welcome Back, Discover The Fast Food',
-                  color: Colors.white,
-                  size: 13,
-                  weight: FontWeight.w500,
-                ),
-                Gap(20),
-                CustomTextField(
-                  hintText: 'Email Address',
-                  controller: emailController,
-                ),
-                Gap(20),
-                CustomTextField(
-                  hintText: 'Password',
-                  isPassword: true,
-                  controller: passwordController,
-                ),
-                Gap(20),
-                Center(
-                  child: Container(
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: CustomText(
-                        text: 'Login',
-                        size: 20,
-                        color: AppColors.primaryColor,
-                        weight: FontWeight.w400,
-                      ),
-                    ),
+                  SvgPicture.asset('assets/logo/hungry.svg', width: 300),
+                  Gap(10),
+                  CustomText(
+                    text: 'Welcome Back, Discover The Fast Food',
+                    color: Colors.white,
+                    size: 13,
+                    weight: FontWeight.w500,
                   ),
-                ),
-              ],
+                  Gap(20),
+                  CustomTextField(
+                    hintText: 'Email Address',
+                    controller: emailController,
+                  ),
+                  Gap(20),
+                  CustomTextField(
+                    hintText: 'Password',
+                    isPassword: true,
+                    controller: passwordController,
+                  ),
+                  Gap(20),
+                  CustomAuthButton(
+                    buttonString: 'Login',
+                    onTap: () {
+                      if (formkey.currentState!.validate()) {
+                        print('login Done');
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
